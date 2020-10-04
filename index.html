@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Secure Password Generator</title>
+  <!-- Section to load the required Bootstrap tags and CSS -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+<!-- Section for main page elements -->
+  <h3 class="text-center"><strong>Password Generator</strong></h3>
+  <main class="container p-3 border-light color-white">
+    <section class="row">
+      <section class="col-md-12">
+        <header class="page-header">
+          <h4><strong>Generate a Password</strong></h4>
+        </header>
+      </section>  
+    </section>
+    <section class="row" id="pw-output">
+        <section class="col-md-12 text-center" id="pw-output">
+            <hr>
+            <br>
+            <p>Your Secure Password:</p>
+            <p id="newPassword"></p>
+            <br>
+            <hr>        
+        </section>
+    </section>  
+    <section class="row">
+      <section class="col-md-12 text-center">
+        <button id=button type="button" class="btn btn-danger" role="button" onclick="generatePassword()">Generate Password</button>
+      </section>
+    </section>
+  </main>
+ 
+
+  <script>
+    var el_down = document.getElementById("newPassword"); 
+  
+  /* Function to generate password */ 
+  function generateP() { 
+      var secureResponse = confirm("Do you want a secure password? (secure means adding numbers and special characters)");
+      var countResponse = prompt("Choose how many characters for the password length? (type a number between 8 and 128)");
+     
+         while(countResponse <= 7 || countResponse >= 129) {
+            alert("Please select a number between 8-128");
+            var countResponse = (prompt("Choose how many characters for the password length? (type a number between 8 and 128)"));
+         } 
+
+      var pass = ''; 
+      var inSecureStrings = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' + 'abcdefghijklmnopqrstuvwxyz'; 
+      var secureStrings = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' + 'abcdefghijklmnopqrstuvwxyz' + '0123456789' + '!@#$%^&*()';         
+      if (secureResponse == true) {
+        for (i = 1; i <= countResponse; i++) { 
+          var char = Math.floor(Math.random() 
+                      * secureStrings.length + 1); 
+            
+          pass += secureStrings.charAt(char) 
+        }
+      } 
+      else {
+        for (i = 1; i <= countResponse; i++) { 
+          var char = Math.floor(Math.random() 
+                      * inSecureStrings.length + 1); 
+            
+          pass += inSecureStrings.charAt(char) 
+        }
+      }  
+      return pass; 
+  } 
+
+  function generatePassword() { 
+      el_down.innerHTML = generateP(); 
+  } 
+  </script>
+
+    <footer id="sticky-footer" class="py-4 text-white-50">
+        <section class="text-center">
+          <small class="text-muted">&copy; 2020 All Rights Reserved</small>
+        </section>
+      </footer>
+    
+      <!-- Section to load the required Bootstrap scripts -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+</body>
+    
+</html>   
